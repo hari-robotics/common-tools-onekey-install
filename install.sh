@@ -1,6 +1,7 @@
 #!/bin/bash
 
-chmod +x ./acados-install.sh ./casadi-install.sh ./cuda128-install.sh ./g2o-install.sh ./pytorch-install.sh ./ros-humble-install.sh
+sudo apt update && sudo apt install git -y
+git clone https://github.com/hari-robotics/common-tools-onekey-install.git ~/.tmp_install
 
 echo "-------------------------------------"
 echo "1) Install Acados"
@@ -16,27 +17,27 @@ read -p "Please choose a number to execute: " choice
 
 case $choice in
     1)
-        ./acados-install.sh
+        bash ./.tmp_install/acados-install.sh
         break
         ;;
     2)
-        ./casadi-install.sh
+        bash ./.tmp_install/casadi-install.sh
         break
         ;;
     3)
-        ./cuda128-install.sh
+        bash ./.tmp_install/cuda128-install.sh
         break
         ;;
     4)
-        ./g2o-install.sh
+        bash ./.tmp_install/g2o-install.sh
         break
         ;;
     5)
-        ./pytorch-install.sh
+        bash ./.tmp_install/pytorch-install.sh
         break
         ;;
     6)
-        ./ros-humble-install.sh
+        bash ./.tmp_install/ros-humble-install.sh
         break
         ;;
     q|Q)

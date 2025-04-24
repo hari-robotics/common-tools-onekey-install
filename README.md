@@ -1,17 +1,6 @@
 ## Installation Guide
 
+Execute following command in terminal
 ```bash
-git clone git@github.com:hari-robotics/common-tools-onekey-install.git onekey-install
-cd onekey-install
-chmod +x ./install.sh
+curl -fsSL https://raw.githubusercontent.com/hari-robotics/common-tools-onekey-install/master/install.sh | bash
 ```
-
-## Usage
-
-In the terminal, run:
-
-```bash
-./install.sh
-```
-
-Then choose the tools you want to install

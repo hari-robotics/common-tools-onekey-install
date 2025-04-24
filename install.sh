@@ -1,6 +1,15 @@
 #!/bin/bash
 
-chmod +x ./acados-install.sh ./casadi-install.sh ./cuda128-install.sh ./g2o-install.sh ./pytorch-install.sh ./ros-humble-install.sh
+cleanup() {
+    rm -rf "$HOME/.tmp_install"
+    exit 1
+}
+
+trap cleanup SIGINT SIGTERM
+trap cleanup EXIT
+
+sudo apt update && sudo apt install git -y;
+git clone https://github.com/hari-robotics/common-tools-onekey-install.git ~/.tmp_install;
 
 echo "-------------------------------------"
 echo "1) Install Acados"
@@ -12,37 +21,32 @@ echo "6) Install ROS Humble"
 echo "q) Quit"
 echo "-------------------------------------"
 
+read -t 0.1 -n 10000 discard 2>/dev/null
 read -p "Please choose a number to execute: " choice
 
 case $choice in
     1)
-        ./acados-install.sh
-        break
+        bash ~/.tmp_install/acados-install.sh
         ;;
     2)
-        ./casadi-install.sh
-        break
+        bash ~/.tmp_install/casadi-install.sh
         ;;
     3)
-        ./cuda128-install.sh
-        break
+        bash ~/.tmp_install/cuda128-install.sh
         ;;
     4)
-        ./g2o-install.sh
-        break
+        bash ~/.tmp_install/g2o-install.sh
         ;;
     5)
-        ./pytorch-install.sh
-        break
+        bash ~/.tmp_install/pytorch-install.sh
         ;;
     6)
-        ./ros-humble-install.sh
-        break
+        bash ~/.tmp_install/ros-humble-install.sh
         ;;
     q|Q)
         exit 0
         ;;
     *)
-        echo "Invalid choice. Please try again."
+        echo "Invalid choice. Exiting..."
         ;;
 esac

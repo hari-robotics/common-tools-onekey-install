@@ -1,7 +1,7 @@
 #!/bin/bash
 
-sudo apt update && sudo apt install git -y
-git clone https://github.com/hari-robotics/common-tools-onekey-install.git ~/.tmp_install
+sudo apt update && sudo apt install git -y;
+git clone https://github.com/hari-robotics/common-tools-onekey-install.git ~/.tmp_install;
 
 echo "-------------------------------------"
 echo "1) Install Acados"
@@ -17,33 +17,27 @@ read -p "Please choose a number to execute: " choice
 
 case $choice in
     1)
-        bash ./.tmp_install/acados-install.sh
-        break
+        bash ~/.tmp_install/acados-install.sh
         ;;
     2)
-        bash ./.tmp_install/casadi-install.sh
-        break
+        bash ~/.tmp_install/casadi-install.sh
         ;;
     3)
-        bash ./.tmp_install/cuda128-install.sh
-        break
+        bash ~/.tmp_install/cuda128-install.sh
         ;;
     4)
-        bash ./.tmp_install/g2o-install.sh
-        break
+        bash ~/.tmp_install/g2o-install.sh
         ;;
     5)
-        bash ./.tmp_install/pytorch-install.sh
-        break
+        bash ~/.tmp_install/pytorch-install.sh
         ;;
     6)
-        bash ./.tmp_install/ros-humble-install.sh
-        break
+        bash ~/.tmp_install/ros-humble-install.sh
         ;;
     q|Q)
         exit 0
         ;;
     *)
-        echo "Invalid choice. Please try again."
+        echo "Invalid choice. Exiting..."
         ;;
 esac

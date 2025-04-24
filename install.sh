@@ -1,5 +1,13 @@
 #!/bin/bash
 
+cleanup() {
+    rm -rf "$HOME/.tmp_install"
+    exit 1
+}
+
+trap cleanup SIGINT SIGTERM
+trap cleanup EXIT
+
 sudo apt update && sudo apt install git -y;
 git clone https://github.com/hari-robotics/common-tools-onekey-install.git ~/.tmp_install;
 
@@ -13,6 +21,7 @@ echo "6) Install ROS Humble"
 echo "q) Quit"
 echo "-------------------------------------"
 
+read -t 0.1 -n 10000 discard 2>/dev/null
 read -p "Please choose a number to execute: " choice
 
 case $choice in

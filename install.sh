@@ -57,8 +57,6 @@ try_add_apt_repository() {
     fi
 }
 
-source $HOME/.tmp_install/scripts/functions.sh
-
 $SCRIPTS_DIR=$HOME/.tmp_install/install
 
 sudo -v
@@ -81,6 +79,8 @@ else
     echo "Exiting..."
     exit 1
 fi
+
+source $HOME/.tmp_install/scripts/functions.sh
 
 while true; do
     echo "-------------------------------------"

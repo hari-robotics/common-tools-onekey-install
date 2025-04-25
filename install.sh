@@ -70,7 +70,7 @@ else
     exit 1
 fi
 
-$SCRIPTS_DIR=$HOME/.tmp_install/install
+SCRIPTS_DIR=$HOME/.tmp_install/install
 source $HOME/.tmp_install/scripts/functions.sh
 
 while true; do

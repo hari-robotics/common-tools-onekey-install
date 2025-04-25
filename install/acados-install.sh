@@ -1,4 +1,6 @@
 #!/bin/bash
+source $HOME/.tmp_install/scripts/functions.sh
+
 mkdir ~/lib
 cd ~/lib
 git clone https://github.com/acados/acados.git

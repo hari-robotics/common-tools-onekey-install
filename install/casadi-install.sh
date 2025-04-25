@@ -1,3 +1,6 @@
+#!/bin/bash
+source $HOME/.tmp_install/scripts/functions.sh
+
 sudo apt install gcc g++ gfortran git cmake liblapack-dev pkg-config --install-recommends -y
 sudo apt install patch wget libmetis-dev -y
 sudo apt install ipython3 python3-dev python3-numpy python3-scipy python3-matplotlib --install-recommends -y

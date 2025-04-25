@@ -1,52 +1,74 @@
 #!/bin/bash
+source $HOME/.tmp_install/scripts/functions.sh
 
-cleanup() {
-    rm -rf "$HOME/.tmp_install"
+$SCRIPTS_DIR=$HOME/.tmp_install/install
+
+sudo -v
+
+try_update_apt
+try_install git
+
+if git clone https://github.com/hari-robotics/common-tools-onekey-install.git ~/.tmp_install > /dev/null 2>&1 & CLONE_PID=$!
+    while kill -0 $CLONE_PID 2>/dev/null; do
+        for c in / - \\ \|; do
+            echo -ne "\rPulling installation scripts $c"
+            sleep 0.1
+        done
+    done
+then
+    echo " Done"
+else
+    echo "Failed"
+    error "Please check your internet connection and try again."
+    echo "Exiting..."
     exit 1
-}
+fi
 
-trap cleanup SIGINT SIGTERM
-trap cleanup EXIT
+while true; do
+    echo "-------------------------------------"
+    echo "1) Install Acados"
+    echo "2) Install Casadi"
+    echo "3) Install CUDA 12.8"
+    echo "4) Install G2O"
+    echo "5) Install Pytorch"
+    echo "6) Install ROS Humble"
+    echo "q) Quit"
+    echo "-------------------------------------"
 
-sudo apt update && sudo apt install git -y;
-git clone https://github.com/hari-robotics/common-tools-onekey-install.git ~/.tmp_install;
+    read -t 0.1 -n 10000 discard 2>/dev/null
+    read -p "Please choose a number to execute: " choice
 
-echo "-------------------------------------"
-echo "1) Install Acados"
-echo "2) Install Casadi"
-echo "3) Install CUDA 12.8"
-echo "4) Install G2O"
-echo "5) Install Pytorch"
-echo "6) Install ROS Humble"
-echo "q) Quit"
-echo "-------------------------------------"
-
-read -t 0.1 -n 10000 discard 2>/dev/null
-read -p "Please choose a number to execute: " choice
-
-case $choice in
-    1)
-        bash ~/.tmp_install/acados-install.sh
-        ;;
-    2)
-        bash ~/.tmp_install/casadi-install.sh
-        ;;
-    3)
-        bash ~/.tmp_install/cuda128-install.sh
-        ;;
-    4)
-        bash ~/.tmp_install/g2o-install.sh
-        ;;
-    5)
-        bash ~/.tmp_install/pytorch-install.sh
-        ;;
-    6)
-        bash ~/.tmp_install/ros-humble-install.sh
-        ;;
-    q|Q)
-        exit 0
-        ;;
-    *)
-        echo "Invalid choice. Exiting..."
-        ;;
-esac
+    case $choice in
+        1)
+            bash $SCRIPTS_DIR/install/acados-install.sh
+            break
+            ;;
+        2)
+            bash $SCRIPTS_DIR/install/casadi-install.sh
+            break
+            ;;
+        3)
+            bash $SCRIPTS_DIR/install/cuda128-install.sh
+            break
+            ;;
+        4)
+            bash $SCRIPTS_DIR/install/g2o-install.sh
+            break
+            ;;
+        5)
+            bash $SCRIPTS_DIR/install/pytorch-install.sh
+            break
+            ;;
+        6)
+            bash $SCRIPTS_DIR/install/ros-humble-install.sh
+            break
+            ;;
+        q|Q)
+            exit 0
+            ;;
+        *)
+            echo "Invalid choice. Please try again."
+            break
+            ;;
+    esac
+done

@@ -89,27 +89,27 @@ while true; do
 
     case $choice in
         1)
-            bash $SCRIPTS_DIR/acados-install.sh
+            source $SCRIPTS_DIR/acados-install.sh
             break
             ;;
         2)
-            bash $SCRIPTS_DIR/casadi-install.sh
+            source $SCRIPTS_DIR/casadi-install.sh
             break
             ;;
         3)
-            bash $SCRIPTS_DIR/cuda128-install.sh
+            source $SCRIPTS_DIR/cuda128-install.sh
             break
             ;;
         4)
-            bash $SCRIPTS_DIR/g2o-install.sh
+            source $SCRIPTS_DIR/g2o-install.sh
             break
             ;;
         5)
-            bash $SCRIPTS_DIR/pytorch-install.sh
+            source $SCRIPTS_DIR/pytorch-install.sh
             break
             ;;
         6)
-            bash $SCRIPTS_DIR/ros-humble-install.sh
+            source $SCRIPTS_DIR/ros-humble-install.sh
             break
             ;;
         q|Q)

@@ -4,7 +4,7 @@ source $HOME/.tmp_install/scripts/functions.sh
 
 try_install locales
 
-if sudo locale-gen en_US en_US.UTF-8 2>&1 & PID=$!
+if sudo locale-gen en_US en_US.UTF-8 > /dev/null 2>&1 & PID=$!
     while kill -0 $PID 2>/dev/null; do
         for c in / - \\ \|; do
             echo -ne "\rgenerating locales $c"

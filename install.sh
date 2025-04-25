@@ -90,34 +90,27 @@ while true; do
     case $choice in
         1)
             source $SCRIPTS_DIR/acados-install.sh
-            break
             ;;
         2)
             source $SCRIPTS_DIR/casadi-install.sh
-            break
             ;;
         3)
             source $SCRIPTS_DIR/cuda128-install.sh
-            break
             ;;
         4)
             source $SCRIPTS_DIR/g2o-install.sh
-            break
             ;;
         5)
             source $SCRIPTS_DIR/pytorch-install.sh
-            break
             ;;
         6)
             source $SCRIPTS_DIR/ros-humble-install.sh
-            break
             ;;
         q|Q)
             exit 0
             ;;
         *)
             echo "Invalid choice. Please try again."
-            break
             ;;
     esac
 done

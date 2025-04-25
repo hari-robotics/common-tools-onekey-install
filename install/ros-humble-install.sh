@@ -1,5 +1,4 @@
 #!/bin/bash
-# update locales
 source $HOME/.tmp_install/scripts/functions.sh
 
 try_install locales

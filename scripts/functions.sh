@@ -93,3 +93,10 @@ try_add_apt_repository() {
         exit 1
     fi
 }
+
+try_mkdir() {
+    local dir="$1"
+    if [ ! -d "$dir" ]; then
+        mkdir -p "$dir"
+    fi
+}

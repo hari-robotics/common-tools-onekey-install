@@ -31,33 +31,23 @@ try_install() {
     fi
 }
 
-try_add_apt_repository() {
-    local repository="$1"
-    local display_name="${2:-$repository}"
-
-    sudo add-apt-repository -y "$repository" > /dev/null 2>&1 &
-    local pid=$!
-
-    local spin='/-\|'
-    while kill -0 "$pid" 2>/dev/null; do
-        for (( i=0; i<${#spin}; i++ )); do
-            echo -ne "\rAdding $display_name to apt repository ${spin:$i:1}"
-            sleep 0.1
+try_update_apt() {
+    if sudo apt update > /dev/null 2>&1 & PID=$!
+        while kill -0 $PID 2>/dev/null; do
+            for c in / - \\ \|; do
+                echo -ne "\rupdating apt source $c"
+                sleep 0.1
+            done
         done
-    done
-
-    wait "$pid"  # 等待安装进程完成
-
-    if [ $? -eq 0 ]; then
-        echo -e " Added"
+    then
+        echo " Done"
     else
-        echo -e " Failed"
-        error "Adding repository failed. Please try adding $display_name manually."
+        echo " Failed"
+        error "apt source updating failed, please check your internet connection and try again."
+        echo "Exiting..."
         exit 1
     fi
 }
-
-$SCRIPTS_DIR=$HOME/.tmp_install/install
 
 sudo -v
 
@@ -80,6 +70,7 @@ else
     exit 1
 fi
 
+$SCRIPTS_DIR=$HOME/.tmp_install/install
 source $HOME/.tmp_install/scripts/functions.sh
 
 while true; do

@@ -90,5 +90,5 @@ else
     exit 1
 fi
 
-# echo 'source /opt/ros/humble/setup.bash' >> ~/.bashrc
+echo 'source /opt/ros/humble/setup.bash' >> ~/.bashrc
 info "ROS Humble Installation Complete"
